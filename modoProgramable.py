@@ -1,7 +1,5 @@
-def mProgramable():
-    ##class
-
-    comandosExistentes = ["ejerota", "desplazar", "simultaneo", "color", "shot", "pausa"]
+def mP():                                                           #main
+    listaComandos = ["ejerota", "desplazar", "simultaneo", "pausa", "color", "reposo", "shot", "vertical"]
     try :
         archivo= open("instrucciones.txt", "r")                     #abre el archivo
         comandos = archivo.readlines()                              #c/u lineas en una lista
@@ -10,32 +8,35 @@ def mProgramable():
         
         for i in comandos:                                          
             quitarEspacio = i.strip("\n")                           #Quita el espacio
-
-            if quitarEspacio not in comandosExistentes:
-                 return "No se reconoce algún comando ingresado"    #valida el comando
-
             comandosCorrectos.append(quitarEspacio)
-
+        print(comandosCorrectos)
+        
+        for i in comandosCorrectos:
+            existe = buscarEnComandos(i, listaComandos)             #valida que sea comando correcto comando                
+            if existe == False:
+                return "No se reconoce algún comando"
+                
         
         for i in comandosCorrectos:                                 
-            if (i == "ejerota"):
+            if "ejerota" in i:
                 print(1)
-            elif (i == "desplazar"):
+            elif "desplazar" in i:
                 print(2)
-            elif (i == "simultaneo"):
+            elif "simultaneo" in i:
                 print(3)
-            elif (i == "color"):
+            elif "pausa" in i:
                 print(4)
-            elif (i == "shot"):
+            elif "color" in i:
                 print(5)
-            elif i == "pausa":
-                print(6)
+            elif "reposo" == i:
+                print("Ir a reposo")
+            elif "shot" == i:
+                print("Disparar")
+            elif "vertical" == i:
+                print("Mandar a posición vertical")
             else:
-                return "No se reconoce algún comando ingresado"    #valida el comando
-        
-       
+              return "No se reconoce algún comando ingresado"    #valida el comando
 
-  
     
         archivo.close()                                             #cierra el archivo
 
@@ -43,14 +44,8 @@ def mProgramable():
         return "El archivo txt debe llamarse instrucciones"         #Valida el nombre del .txt
 
 
-def aa (comandos, comandosExistentes):
-    for i in comandos:                                          
-            quitarEspacio = i.strip("\n")                           #Quita el espacio
-        for j in comandosExistentes:
-            if j in quitarEspacio:
-                return True
-            
-    return "No se reconoce algún comando ingresado"    #valida el comando
-
-            comandosCorrectos.append(quitarEspacio)
-            
+def buscarEnComandos (variable, lista):                                           
+    for i in lista:
+        if i in variable:
+            return True
+    return False
